@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Sep 20 13:17:48 CST 2017
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=E\:\\server3\\fengtian.jar
+manifest.mergeall=true
+manifest.mainclass=com.zxz.controller.StartServer
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=

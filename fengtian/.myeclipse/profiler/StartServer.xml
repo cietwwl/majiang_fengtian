@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="app_preset_prof_preset_name">StartServer Launch Configuration</entry>
+<entry key="app_preset_prof_preset_filter_s"/>
+<entry key="app_preset_prof_preset_filter_p">com.demo.*,
+com.gs.rpc.*,
+com.message.proto.*,
+com.testhupai.*,
+com.zxz.algorithm.*,
+com.zxz.config.utils.*,
+com.zxz.controller.*,
+com.zxz.dao.*,
+com.zxz.domain.*,
+com.zxz.filter.*,
+com.zxz.protobuf.*,
+com.zxz.redis.*,
+com.zxz.service.*,
+com.zxz.utils.*,
+gs.tool.log.*,
+io.netty.bootstrap.*,
+io.netty.buffer.*,
+io.netty.channel.*,
+io.netty.example.telnet.*,
+io.netty.example.worldclock.*,
+io.netty.handler.codec.*,
+io.netty.handler.flow.*,
+io.netty.handler.flush.*,
+io.netty.handler.ipfilter.*,
+io.netty.handler.logging.*,
+io.netty.handler.ssl.*,
+io.netty.handler.stream.*,
+io.netty.handler.timeout.*,
+io.netty.handler.traffic.*,
+io.netty.resolver.*,
+io.netty.util.*,
+org.json.*</entry>
+<entry key="app_preset_prof_preset_alloc_p">10</entry>
+<entry key="app_preset_"/>
+<entry key="app_preset_prof_preset_samplingRefreshRate_s">1000</entry>
+<entry key="app_preset_prof_preset_stacks_p">false</entry>
+<entry key="app_preset_prof_preset_roots_p">com.demo.**
+com.gs.rpc.**
+com.message.proto.**
+com.testhupai.**
+com.zxz.algorithm.**
+com.zxz.config.utils.**
+com.zxz.controller.**
+com.zxz.dao.**
+com.zxz.domain.**
+com.zxz.filter.**
+com.zxz.protobuf.**
+com.zxz.redis.**
+com.zxz.service.**
+com.zxz.utils.**
+gs.tool.log.**
+io.netty.bootstrap.**
+io.netty.buffer.**
+io.netty.channel.**
+io.netty.example.telnet.**
+io.netty.example.worldclock.**
+io.netty.handler.codec.**
+io.netty.handler.flow.**
+io.netty.handler.flush.**
+io.netty.handler.ipfilter.**
+io.netty.handler.logging.**
+io.netty.handler.ssl.**
+io.netty.handler.stream.**
+io.netty.handler.timeout.**
+io.netty.handler.traffic.**
+io.netty.resolver.**
+io.netty.util.**
+org.json.**
+</entry>
+<entry key="profiler.settings.instrument.empty.methods">false</entry>
+<entry key="myeclipse.profiling.mode">0</entry>
+<entry key="profiler.settings.istrument.getter.setter.methods">false</entry>
+<entry key="app_preset_prof_preset_samplingRate_s">100</entry>
+<entry key="app_preset_prof_preset_filterMode_s">true</entry>
+<entry key="app_preset_prof_preset_selector"/>
+<entry key="app_preset_prof_preset_refreshRate_s">1000</entry>
+<entry key="app_preset_prof_preset_runnables_p">true</entry>
+<entry key="app_preset_prof_preset_filterMode_p">false</entry>
+<entry key="app_preset_prof_preset_memoryMode_p">true</entry>
+</properties>
