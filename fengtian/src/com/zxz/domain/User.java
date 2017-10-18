@@ -919,14 +919,6 @@ public class User implements Constant{
 	}
 	
 	
-	/**在出去的牌的集合中添加一张牌
-	 * @param card
-	 */
-	public void addMyPlays(int card){
-		myPlays.add(card);
-	}
-	
-
 	
 	/**碰牌
 	 * @param list 需要碰掉的牌

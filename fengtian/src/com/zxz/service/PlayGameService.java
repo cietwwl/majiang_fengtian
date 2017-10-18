@@ -637,9 +637,12 @@ public class PlayGameService extends BaseService implements Constant{
 		}else{
 			List<Integer> cards = user.getCards();
 			int of = cards.indexOf(cardId);
-			cards.remove(of);
-			notifyAllUserQiangGang(game.getRoom(),cardId,userDirChu,userDirTip);
+			if (of != -1) {
+				cards.remove(of);
+				notifyAllUserQiangGang(game.getRoom(),cardId,userDirChu,userDirTip);
+			}
 		}
+		
 		gamingUser.setCanWin(false);
 		game.clearPriority();
 		clearAllUserCan(game);		//清空用户所有可以进行的操作 比如可以听 可以吃 可以胡 可以碰 都置成false
@@ -1251,7 +1254,6 @@ public class PlayGameService extends BaseService implements Constant{
 		game.setGameStatus(1);// 设置抓牌后的状态  
 		game.setYaoPaiStatus(2);
 		boolean isWin = user.zhuaPai(removeCard);// 抓牌
-		int total = 0;
 		if(!isPengGang){
 			game.setYaoPaiStatus(2);//上一轮出的牌没人要
 		}
@@ -1266,7 +1268,7 @@ public class PlayGameService extends BaseService implements Constant{
 		// 1.如果用户托管的时候用户直接胡牌
 		// 2.如果用户没有托管，判断用户是否可以公杠和暗杠，如果可以公杠和暗杠给出用户：【杠】【胡】的提示
 		user.clearAllCan();
-		total = userNotWin(game, remainCards, removeCard, user,total,isWin);
+		int total = userNotWin(game, remainCards, removeCard, user,isWin);
 		if(total>0){
 			notifyUserDrawDirection(removeCard, user);//通知抓牌的方向
 			notifyUserZhaPaiTip(game,user,removeCard);
@@ -1370,7 +1372,8 @@ public class PlayGameService extends BaseService implements Constant{
 	 * @param isWin 
 	 * @param isGang 
 	 */
-	private static int userNotWin(Game game, List<Integer> remainCards, Integer removeCard, User user, int total, boolean isWin) {
+	private static int userNotWin(Game game, List<Integer> remainCards, Integer removeCard, User user, boolean isWin) {
+		int total = 0;
 		user.setUserCanPlay(true);//该用户可以打牌
 		//分析用户可不可以旋风杠   //中发白 OR 东南西北
 		//旋风杠也可以明杠 也可以暗杠
@@ -1400,7 +1403,8 @@ public class PlayGameService extends BaseService implements Constant{
 			}else{
 				//分析该用户是否可以暗杠
 				List<Integer> anGangCards = isUserCanAnGang(user);
-				if(anGangCards.size()>0){//可以暗杠
+				////可以暗杠
+				if(anGangCards.size()>0){
 					List<Integer> cards = user.getCards();
 					List<Integer> newCards = HuPai.getNewListFromOldList(cards);
 					List<PengCard> newPengCards = user.getPengCards();
@@ -1441,7 +1445,8 @@ public class PlayGameService extends BaseService implements Constant{
 						}
 						return -1;
 					}
-				}else{//玩家不可以暗杠
+				}else{
+					//玩家不可以暗杠
 					if(total>0){
 						notifyUserDrawDirection(removeCard, user);//通知抓牌的方向
 						notifyUserZhaPaiTip(game,user,removeCard);
@@ -2603,8 +2608,7 @@ public class PlayGameService extends BaseService implements Constant{
 			userChiCards.add(0, cardId);
 			HuiFangUitl.getChiPai(game.getHuiFang(), gamingUser, userChiCards,TypeUtils.getStringDir(userDirChu));
 			//判断用户能不能 亮 杠
-			int total = 0;
-			userNotWin(game, game.getRemainCards(), cardId, user,total,false);
+			int total =userNotWin(game, game.getRemainCards(), cardId, user,false);
 			if(total>0){
 				//抓牌提示
 				notifyUserZhaPaiTip(game,user,cardId);
@@ -3205,6 +3209,9 @@ public class PlayGameService extends BaseService implements Constant{
 			priority.setCurrentNumber(0);
 			notifyAllUserChuTip(user,room,cardId);//通知用户出牌提示
 		}else{//下个用户抓牌
+			String direc = game.getDirec();
+			String nextDirection2 = getNextDirection(direc, room.getTotalUser());
+			game.setDirec(nextDirection2);
 			if(chouZhuang(game.getRemainCards(),game)){
 				afterChouZhuang(game, user);//臭庄之后处理
 				return;
@@ -3555,7 +3562,6 @@ public class PlayGameService extends BaseService implements Constant{
 	}
 	
 	/**
-	 * FIXME 注意这里加锁是为了，同一时间出牌
 	 * 自动出牌
 	 * @param isAfterGang 
 	 */
@@ -3569,8 +3575,6 @@ public class PlayGameService extends BaseService implements Constant{
 		user.getMyPlays().add(cardId);
 		game.setGameStatus(0);
 		game.setLastMap(user,cardId);
-		String nextDirection = getNextDirection(direc, room.getTotalUser());
-		game.setDirec(nextDirection);
 		if(cardId<0){
 			logger.info("可能在同一时间打牌了");
 			return;
